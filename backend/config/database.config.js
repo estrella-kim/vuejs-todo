@@ -1,7 +1,7 @@
 module.exports ={
   host : 'localhost',
-  user : 'me',
-  password : 'secret',
+  user : 'root',
+  password : 'dudgns123',
   port : 3306,
   database : 'my_db'
 };

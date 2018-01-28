@@ -4,10 +4,10 @@
 const database = require('../index');
 const connection = database.connection();
 
-const todoModel = {
-    fetchTodos: function(callback) {
-        return connection.query('SELECT * from todos', callback);
+const authModel = {
+    getUsers: function(callback) {
+        return connection.query('select * from todos', callback);
     }
 };
 
-module.exports = todoModel;
+module.exports = authModel;
