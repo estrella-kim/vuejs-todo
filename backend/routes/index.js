@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('./auth/index');
-const board = require('./board/index');
+const todo = require('./todo/index');
 
 router.use('/', auth);
-router.use('/board', board);
+router.use('/todos', todo);
 
 module.exports = router;
