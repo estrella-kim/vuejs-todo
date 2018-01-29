@@ -8,8 +8,8 @@ export class Todo extends React.Component{
             <div>
                 <ul className="filter-wrap">
                     <li><input type="radio"/>todo</li>
-                    <li>doing</li>
-                    <li>done</li>
+                    <li><input type="radio"/>doing</li>
+                    <li><input type="radio"/>done</li>
                 </ul>
                 <div className="lists-wrap">
                     <ul>

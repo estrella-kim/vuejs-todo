@@ -18263,7 +18263,7 @@ var _reactDom = __webpack_require__(17);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _button = __webpack_require__(27);
+var _components = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18293,7 +18293,7 @@ var Test = exports.Test = function (_React$Component) {
                     null,
                     'this is test component'
                 ),
-                _react2.default.createElement(_button.Button, null)
+                _react2.default.createElement(_components.Button, null)
             );
         }
     }]);
@@ -18311,17 +18311,38 @@ _reactDom2.default.render(_react2.default.createElement(Test, null), document.ge
 
 
 Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _button = __webpack_require__(28);
+
+Object.defineProperty(exports, 'Button', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_button).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Button = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(4);
 
-var React = _interopRequireWildcard(_react);
+var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18329,7 +18350,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Button = exports.Button = function (_React$Component) {
+var Button = function (_React$Component) {
     _inherits(Button, _React$Component);
 
     function Button() {
@@ -18341,10 +18362,10 @@ var Button = exports.Button = function (_React$Component) {
     _createClass(Button, [{
         key: "render",
         value: function render() {
-            return React.createElement(
+            return _react2.default.createElement(
                 "div",
                 null,
-                React.createElement(
+                _react2.default.createElement(
                     "button",
                     { type: "button" },
                     "\uBC84\uD2BC1"
@@ -18354,7 +18375,9 @@ var Button = exports.Button = function (_React$Component) {
     }]);
 
     return Button;
-}(React.Component);
+}(_react2.default.Component);
+
+exports.default = Button;
 
 /***/ })
 /******/ ]);

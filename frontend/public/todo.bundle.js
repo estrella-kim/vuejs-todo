@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 29);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -18244,7 +18244,8 @@ module.exports = camelize;
 /***/ }),
 /* 26 */,
 /* 27 */,
-/* 28 */
+/* 28 */,
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18265,7 +18266,7 @@ var _reactDom = __webpack_require__(17);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-__webpack_require__(29);
+__webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18292,20 +18293,23 @@ var Todo = exports.Todo = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'ul',
-                    { className: 'fiter-wrap' },
+                    { className: 'filter-wrap' },
                     _react2.default.createElement(
                         'li',
                         null,
+                        _react2.default.createElement('input', { type: 'radio' }),
                         'todo'
                     ),
                     _react2.default.createElement(
                         'li',
                         null,
+                        _react2.default.createElement('input', { type: 'radio' }),
                         'doing'
                     ),
                     _react2.default.createElement(
                         'li',
                         null,
+                        _react2.default.createElement('input', { type: 'radio' }),
                         'done'
                     )
                 ),
@@ -18328,13 +18332,13 @@ var Todo = exports.Todo = function (_React$Component) {
 _reactDom2.default.render(_react2.default.createElement(Todo, null), document.getElementById('todo'));
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(30);
+var content = __webpack_require__(31);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -18342,7 +18346,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(32)(content, options);
+var update = __webpack_require__(33)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -18359,21 +18363,21 @@ if(false) {
 }
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(31)(false);
+exports = module.exports = __webpack_require__(32)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* defatul */\r\nul, li{\r\n    list-style :none;\r\n}\r\n.filter-wrap{\r\n    overflow: hidden;\r\n    border: solid 1px #c1c1c1;\r\n}\r\n.filter-wrap li{\r\n    float:left;\r\n}", ""]);
+exports.push([module.i, "/* defatul */\r\nul, li{\r\n    list-style :none;\r\n}\r\n.filter-wrap{\r\n    overflow: hidden;\r\n    border: solid 1px #c1c1c1;\r\n}\r\n.filter-wrap li{\r\n    float:left;\r\n    margin-left: 20px;\r\n}\r\n.filter-wrap li:last-child{\r\n    margin-left:0;\r\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 /*
@@ -18455,7 +18459,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -18511,7 +18515,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(33);
+var	fixUrls = __webpack_require__(34);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -18827,7 +18831,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 

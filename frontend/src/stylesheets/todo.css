@@ -8,4 +8,8 @@ ul, li{
 }
 .filter-wrap li{
     float:left;
+    margin-left: 20px;
+}
+.filter-wrap li:last-child{
+    margin-left:0;
 }
