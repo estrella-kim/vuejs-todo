@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd frontend && npm run dev & cd backend && npm start",
-    "test" : "cd frontend && npm run dev & cd backend && npm start"
+    "start": "cd frontend && npm start & cd backend && npm start",
+    "test" : "cd frontend && npm start & cd backend && npm start"
   },
   "keywords": [],
   "author": "",
