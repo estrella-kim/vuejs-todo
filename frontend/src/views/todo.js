@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../stylesheets/todo.css';
+
 export class Todo extends React.Component{
     render () {
         return (
             <div>
-                <ul className="fiter-wrap">
-                    <li>todo</li>
+                <ul className="filter-wrap">
+                    <li><input type="radio"/>todo</li>
                     <li>doing</li>
                     <li>done</li>
                 </ul>
