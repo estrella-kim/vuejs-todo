@@ -1,0 +1,11 @@
+/* defatul */
+ul, li{
+    list-style :none;
+}
+.filter-wrap{
+    overflow: hidden;
+    border: solid 1px #c1c1c1;
+}
+.filter-wrap li{
+    float:left;
+}
