@@ -3,7 +3,7 @@
 ## Features
 
 * Node.js
-* Vue
+* React
 
 ### Node.js Stack
 
@@ -11,10 +11,8 @@
 - Forever
 - Nodemon
 
-### Vuejs Stack
+### React Stack
 
-- Vue@2.5.2
-- Vue Router@3.0.1
 
 ## Getting started
 
