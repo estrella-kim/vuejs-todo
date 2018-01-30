@@ -18292,6 +18292,15 @@ var Todo = exports.Todo = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(
+                    'div',
+                    { className: 'write-list' },
+                    _react2.default.createElement(
+                        'form',
+                        null,
+                        _react2.default.createElement('input', { type: 'text' })
+                    )
+                ),
+                _react2.default.createElement(
                     'ul',
                     { className: 'filter-wrap' },
                     _react2.default.createElement(
@@ -18371,7 +18380,7 @@ exports = module.exports = __webpack_require__(32)(false);
 
 
 // module
-exports.push([module.i, "/* defatul */\r\nul, li{\r\n    list-style :none;\r\n}\r\n.filter-wrap{\r\n    overflow: hidden;\r\n    border: solid 1px #c1c1c1;\r\n}\r\n.filter-wrap li{\r\n    float:left;\r\n    margin-left: 20px;\r\n}\r\n.filter-wrap li:last-child{\r\n    margin-left:0;\r\n}", ""]);
+exports.push([module.i, "/* defatul */\r\nul, li{\r\n    list-style :none;\r\n}\r\n.filter-wrap{\r\n    overflow: hidden;\r\n    border: solid 1px #c1c1c1;\r\n}\r\n.filter-wrap li{\r\n    float:left;\r\n    margin-left: 20px;\r\n}\r\n.filter-wrap li:last-child{\r\n    margin-left:0;\r\n}\r\n.write-list{\r\n    margin-bottom : 30px;\r\n}", ""]);
 
 // exports
 

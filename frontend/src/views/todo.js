@@ -6,6 +6,11 @@ export class Todo extends React.Component{
     render () {
         return (
             <div>
+                <div className="write-list">
+                    <form>
+                        <input type="text"/>
+                    </form>
+                </div>
                 <ul className="filter-wrap">
                     <li><input type="radio"/>todo</li>
                     <li><input type="radio"/>doing</li>

@@ -13,3 +13,6 @@ ul, li{
 .filter-wrap li:last-child{
     margin-left:0;
 }
+.write-list{
+    margin-bottom : 30px;
+}
