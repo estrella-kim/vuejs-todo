@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cd frontend && npm start & cd backend && npm start",
-    "test" : "cd frontend && npm i && npm start & cd backend && npm i && npm start"
+    "test" : "cd frontend && npm i & cd backend && npm i && npm test"
   },
   "keywords": [],
   "author": "",
