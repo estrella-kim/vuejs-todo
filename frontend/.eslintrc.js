@@ -8,6 +8,9 @@ module.exports = {
         "space-before-blocks" : 0,
         "indent" : 0,
         "no-useless-constructor" : 1,
-        "keyword-spacing": 0
+        "keyword-spacing": 0,
+        "padded-blocks": 0,
+        "key-spacing" : 0,
+        "space-in-parens" : 0
     }
 };
