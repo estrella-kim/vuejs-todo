@@ -13,7 +13,10 @@ export class Todo extends React.Component{
         this.lists = [];
     }
     registerList (e) {
-        if(e) e.preventDefault();
+        if(e) {
+            e.preventDefault();
+        }
+        console.log('register');
         this.lists.push(this.state.text);
         console.log(this.lists);
         this.setState({
@@ -27,13 +30,19 @@ export class Todo extends React.Component{
             text : text
         })
     }
+    click () {
+        console.log('click');
+    }
+    delete () {
+        console.log('delete');
+    }
     render () {
         return (
             <div>
                 <div className="write-list">
                     <form onSubmit={(e) => this.registerList(e)}>
                         <input type="text" onChange={(e) => this.getText(e) } value={this.state.text}/>
-                        <Button onClick={() => this.registerList()}/>
+                        <Button buttonText="입력" onClick={ this.click }/>
                     </form>
                 </div>
                 <ul className="filter-wrap">
@@ -43,7 +52,7 @@ export class Todo extends React.Component{
                 </ul>
                 <div className="lists-wrap">
                     <ul>
-                        { this.state.lists.map((v, i) => (<li key={i}>{v}</li>))}
+                        { this.state.lists.map((v, i) => (<li key={i}>{v}<Button buttonText="삭제" onClick={ this.delete }/></li>))}
                     </ul>
                 </div>
             </div>

@@ -18303,7 +18303,8 @@ var Button = function (_React$Component) {
             return _react2.default.createElement(
                 "button",
                 { type: "button" },
-                "\uBC84\uD2BC1"
+                this.props.buttonText,
+                " "
             );
         }
     }]);

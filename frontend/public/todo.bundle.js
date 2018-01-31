@@ -18303,7 +18303,8 @@ var Button = function (_React$Component) {
             return _react2.default.createElement(
                 "button",
                 { type: "button" },
-                "\uBC84\uD2BC1"
+                this.props.buttonText,
+                " "
             );
         }
     }]);
@@ -18357,7 +18358,7 @@ var Todo = exports.Todo = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this));
 
         _this.state = {
-            list: '',
+            text: '',
             lists: []
         };
         _this.lists = [];
@@ -18367,13 +18368,29 @@ var Todo = exports.Todo = function (_React$Component) {
     _createClass(Todo, [{
         key: 'registerList',
         value: function registerList(e) {
-            if (e) e.preventDefault();
-            console.log(this.state.text);
-            this.lists.push(this.state.list);
+            if (e) {
+                e.preventDefault();
+            }
+            console.log('register');
+            this.lists.push(this.state.text);
+            console.log(this.lists);
             this.setState({
                 lists: this.lists,
                 text: ''
             });
+        }
+    }, {
+        key: 'getText',
+        value: function getText(e) {
+            var text = e.target.value;
+            this.setState({
+                text: text
+            });
+        }
+    }, {
+        key: 'click',
+        value: function click() {
+            console.log('click');
         }
     }, {
         key: 'render',
@@ -18391,10 +18408,10 @@ var Todo = exports.Todo = function (_React$Component) {
                         { onSubmit: function onSubmit(e) {
                                 return _this2.registerList(e);
                             } },
-                        _react2.default.createElement('input', { type: 'text', value: this.state.text }),
-                        _react2.default.createElement(_index.Button, { onClick: function onClick() {
-                                return _this2.registerList();
-                            } })
+                        _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                                return _this2.getText(e);
+                            }, value: this.state.text }),
+                        _react2.default.createElement(_index.Button, { buttonText: '\uC785\uB825', onClick: this.click })
                     )
                 ),
                 _react2.default.createElement(
@@ -18437,11 +18454,12 @@ var Todo = exports.Todo = function (_React$Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        this.state.lists.map(function (i, v) {
+                        this.state.lists.map(function (v, i) {
                             return _react2.default.createElement(
                                 'li',
                                 { key: i },
-                                _this2.state.text
+                                v,
+                                _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C' })
                             );
                         })
                     )
