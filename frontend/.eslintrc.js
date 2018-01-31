@@ -11,6 +11,7 @@ module.exports = {
         "keyword-spacing": 0,
         "padded-blocks": 0,
         "key-spacing" : 0,
-        "space-in-parens" : 0
+        "space-in-parens" : 0,
+        "no-multi-spaces" : 1
     }
 };

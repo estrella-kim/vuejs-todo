@@ -18360,26 +18360,19 @@ var Todo = exports.Todo = function (_React$Component) {
             list: '',
             lists: []
         };
+        _this.lists = [];
         return _this;
     }
 
     _createClass(Todo, [{
         key: 'registerList',
         value: function registerList(e) {
-            e.preventDefault();
-            this.setState(function (state) {
-                return {
-                    lists: [state.list]
-                };
-            });
-        }
-    }, {
-        key: 'changeList',
-        value: function changeList(e) {
-            var list = e.target.value;
-            console.log(e.target.value);
+            if (e) e.preventDefault();
+            console.log(this.state.text);
+            this.lists.push(this.state.list);
             this.setState({
-                list: list
+                lists: this.lists,
+                text: ''
             });
         }
     }, {
@@ -18398,10 +18391,10 @@ var Todo = exports.Todo = function (_React$Component) {
                         { onSubmit: function onSubmit(e) {
                                 return _this2.registerList(e);
                             } },
-                        _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                                return _this2.changeList(e);
-                            }, value: this.state.list }),
-                        _react2.default.createElement(_index.Button, { onClick: this.registerList() })
+                        _react2.default.createElement('input', { type: 'text', value: this.state.text }),
+                        _react2.default.createElement(_index.Button, { onClick: function onClick() {
+                                return _this2.registerList();
+                            } })
                     )
                 ),
                 _react2.default.createElement(
@@ -18444,11 +18437,13 @@ var Todo = exports.Todo = function (_React$Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        _react2.default.createElement(
-                            'li',
-                            null,
-                            this.state.list
-                        )
+                        this.state.lists.map(function (i, v) {
+                            return _react2.default.createElement(
+                                'li',
+                                { key: i },
+                                _this2.state.text
+                            );
+                        })
                     )
                 )
             );

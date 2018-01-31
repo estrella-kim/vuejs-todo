@@ -7,24 +7,24 @@ export class Todo extends React.Component{
     constructor () {
         super();
         this.state = {
-            list : '',
+            text : '',
             lists : []
         }
         this.lists = [];
     }
     registerList (e) {
         if(e) e.preventDefault();
-        this.lists.push(this.state.list);
-        this.setState( {
+        this.lists.push(this.state.text);
+        console.log(this.lists);
+        this.setState({
             lists : this.lists,
-            list : ''
+            text : ''
         })
     }
-    changeList (e) {
-        const list = e.target.value;
-        console.log(e.target.value);
+    getText (e) {
+        const text = e.target.value;
         this.setState({
-            list : list
+            text : text
         })
     }
     render () {
@@ -32,7 +32,7 @@ export class Todo extends React.Component{
             <div>
                 <div className="write-list">
                     <form onSubmit={(e) => this.registerList(e)}>
-                        <input type="text" onChange={(e) => this.changeList(e)} value={this.state.list}/>
+                        <input type="text" onChange={(e) => this.getText(e) } value={this.state.text}/>
                         <Button onClick={() => this.registerList()}/>
                     </form>
                 </div>
@@ -43,7 +43,7 @@ export class Todo extends React.Component{
                 </ul>
                 <div className="lists-wrap">
                     <ul>
-                        { this.state.lists.map((i, v) => (<li key={i}>{this.state.list}</li>))}
+                        { this.state.lists.map((v, i) => (<li key={i}>{v}</li>))}
                     </ul>
                 </div>
             </div>
