@@ -12,4 +12,3 @@ export default class Button extends React.Component{
         )
     }
 }
-ReactDOM.render(<Button/>, document.getElementById('button'))

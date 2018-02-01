@@ -18608,13 +18608,13 @@ var Button = function (_React$Component) {
     }
 
     _createClass(Button, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'button',
-                { type: 'button', onClick: this.props.onClick },
+                "button",
+                { type: "button", onClick: this.props.onClick },
                 this.props.buttonText,
-                ' '
+                " "
             );
         }
     }]);
@@ -18623,8 +18623,6 @@ var Button = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Button;
-
-ReactDOM.render(_react2.default.createElement(Button, null), document.getElementById('button'));
 
 /***/ }),
 /* 29 */
@@ -19081,12 +19079,14 @@ var Todo = exports.Todo = function (_React$Component) {
         }
     }, {
         key: 'delete',
-        value: function _delete() {
+        value: function _delete(index) {
+            console.log(index);
             console.log('delete');
         }
     }, {
         key: 'modify',
-        value: function modify() {
+        value: function modify(index) {
+            console.log(index);
             console.log('modify');
         }
     }, {
@@ -19159,8 +19159,12 @@ var Todo = exports.Todo = function (_React$Component) {
                                 'li',
                                 { key: i },
                                 v,
-                                _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: _this2.delete }),
-                                _react2.default.createElement(_index.Button, { buttonText: '\uC218\uC815', onClick: _this2.modify })
+                                _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick(i) {
+                                        return _this2.delete(i);
+                                    } }),
+                                _react2.default.createElement(_index.Button, { buttonText: '\uC218\uC815', onClick: function onClick(i) {
+                                        return _this2.modify(i);
+                                    } })
                             );
                         })
                     )
@@ -19171,8 +19175,6 @@ var Todo = exports.Todo = function (_React$Component) {
 
     return Todo;
 }(_react2.default.Component);
-
-_reactDom2.default.render(_react2.default.createElement(Todo, null), document.getElementById('todo'));
 
 /***/ }),
 /* 37 */

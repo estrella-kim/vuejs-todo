@@ -36,10 +36,12 @@ export class Todo extends React.Component{
         e.preventDefault();
         console.log('click');
     }
-    delete () {
+    delete (index) {
+        console.log(index);
         console.log('delete');
     }
-    modify() {
+    modify(index) {
+        console.log(index);
         console.log('modify');
     }
     render () {
@@ -58,10 +60,11 @@ export class Todo extends React.Component{
                 </ul>
                 <div className="lists-wrap">
                     <ul>
-                        { this.state.lists.map((v, i) => (<li key={i}>{v}<Button buttonText="삭제" onClick={this.delete}/><Button buttonText="수정" onClick={this.modify}/></li>))}
+                        { this.state.lists.map((v, i) => (<li key={i}>{v}<Button buttonText="삭제" onClick={ i => this.delete(i)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
                     </ul>
                 </div>
             </div>
         )
     }
 }
+ReactDOM.render(<Todo/>, document.getElementById('todo'));

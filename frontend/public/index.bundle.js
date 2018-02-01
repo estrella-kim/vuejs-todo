@@ -18299,13 +18299,13 @@ var Button = function (_React$Component) {
     }
 
     _createClass(Button, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'button',
-                { type: 'button', onClick: this.props.onClick },
+                "button",
+                { type: "button", onClick: this.props.onClick },
                 this.props.buttonText,
-                ' '
+                " "
             );
         }
     }]);
@@ -18314,8 +18314,6 @@ var Button = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Button;
-
-ReactDOM.render(_react2.default.createElement(Button, null), document.getElementById('button'));
 
 /***/ }),
 /* 29 */,
