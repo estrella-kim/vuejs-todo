@@ -12,6 +12,8 @@ module.exports = {
         "padded-blocks": 0,
         "key-spacing" : 0,
         "space-in-parens" : 0,
-        "no-multi-spaces" : 1
+        "no-multi-spaces" : 1,
+        "spaced-comment" : 0,
+        "space-before-function-paren" : 0
     }
 };

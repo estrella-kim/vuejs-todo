@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "webpack & node ./bin/www",
-    "test" : "webpack",
-    "dev" : "webpack && webpack-dev-server"
+    "test": "webpack",
+    "dev": "webpack && webpack-dev-server"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -19,6 +19,7 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
+    "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
