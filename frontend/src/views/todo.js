@@ -42,16 +42,16 @@ export class Todo extends React.Component{
             lists : this.lists,
             text : ''
         })
+        $http.post('http://localhost:8000/todo', this.state)
+            .then(function(res){
+                console.log(res);
+            })
     }
     getText (e) {
         const text = e.target.value;
         this.setState({
             text : text
         })
-    }
-    handleClick (e) {
-        e.preventDefault();
-        console.log('click');
     }
     delete (index) {
         console.log(index);
@@ -67,10 +67,10 @@ export class Todo extends React.Component{
                 <div className="write-list">
                     <form onSubmit={(e) => this.registerList(e)}>
                         <input type="text" onChange={(e) => this.getText(e) } value={this.state.text}/>
-                        <Button buttonText="입력" onClick={ e => this.handleClick(e) }/>
+                        <Button buttonText="입력" onClick={ e => this.registerList(e) }/>
                     </form>
                 </div>
-                <ul className="filter-wrap">
+                <ul className="filter-wrap">d
                     <li><label><input type="radio" name="todo-list"/>todo</label></li>
                     <li><label><input type="radio" name="todo-list"/>doing</label></li>
                     <li><label><input type="radio" name="todo-list"/>done</label></li>
