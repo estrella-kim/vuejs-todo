@@ -18,12 +18,14 @@ export class Todo extends React.Component{
     }
     componentDidMount () {
         let getLists = () => {
+            let _this = this;
             $http.get('http://localhost:8000/todo')
                 .then(function (res) {
-                    console.log(res.data);
                     res.data.forEach(function (value, index) {
-                        console.log(value.todo);
                         lists.push(value.todo);
+                    })
+                    _this.setState({
+                        lists : lists
                     })
                 })
         }

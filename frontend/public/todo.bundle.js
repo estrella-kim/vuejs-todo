@@ -19033,6 +19033,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var $http = _axios2.default;
+var lists = [];
 
 var Todo = exports.Todo = function (_React$Component) {
     _inherits(Todo, _React$Component);
@@ -19040,22 +19041,35 @@ var Todo = exports.Todo = function (_React$Component) {
     function Todo() {
         _classCallCheck(this, Todo);
 
-        $http.get('http://localhost:8000/todo').then(function (res) {
-            res.header('Access-Control-Allow-Origin', '*');
-            console.log(res);
-        });
+        var _this2 = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this));
 
-        var _this = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this));
-
-        _this.state = {
+        _this2.state = {
             text: '',
-            lists: []
+            lists: lists
         };
-        _this.lists = [];
-        return _this;
+        _this2.lists = lists;
+        return _this2;
     }
 
     _createClass(Todo, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this3 = this;
+
+            var getLists = function getLists() {
+                var _this = _this3;
+                $http.get('http://localhost:8000/todo').then(function (res) {
+                    res.data.forEach(function (value, index) {
+                        lists.push(value.todo);
+                    });
+                    _this.setState({
+                        lists: lists
+                    });
+                });
+            };
+            getLists();
+        }
+    }, {
         key: 'registerList',
         value: function registerList(e) {
             if (e) {
@@ -19098,7 +19112,7 @@ var Todo = exports.Todo = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this4 = this;
 
             return _react2.default.createElement(
                 'div',
@@ -19109,13 +19123,13 @@ var Todo = exports.Todo = function (_React$Component) {
                     _react2.default.createElement(
                         'form',
                         { onSubmit: function onSubmit(e) {
-                                return _this2.registerList(e);
+                                return _this4.registerList(e);
                             } },
                         _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-                                return _this2.getText(e);
+                                return _this4.getText(e);
                             }, value: this.state.text }),
                         _react2.default.createElement(_index.Button, { buttonText: '\uC785\uB825', onClick: function onClick(e) {
-                                return _this2.handleClick(e);
+                                return _this4.handleClick(e);
                             } })
                     )
                 ),
@@ -19165,10 +19179,10 @@ var Todo = exports.Todo = function (_React$Component) {
                                 { key: i },
                                 v,
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick(i) {
-                                        return _this2.delete(i);
+                                        return _this4.delete(i);
                                     } }),
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC218\uC815', onClick: function onClick(i) {
-                                        return _this2.modify(i);
+                                        return _this4.modify(i);
                                     } })
                             );
                         })
