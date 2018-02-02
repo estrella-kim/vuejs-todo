@@ -3,21 +3,31 @@ import ReactDOM from 'react-dom';
 import '../stylesheets/todo.css';
 import { Button } from '../components/index';
 import axios from 'axios';
-
-
 const $http = axios;
+const lists = [];
+
+
 export class Todo extends React.Component{
     constructor () {
-        $http.get('http://localhost:8000/todo')
-            .then(function(res) {
-                console.log(res);
-            })
         super();
         this.state = {
             text : '',
-            lists : []
+            lists : lists
         }
-        this.lists = [];
+        this.lists = lists;
+    }
+    componentDidMount () {
+        let getLists = () => {
+            $http.get('http://localhost:8000/todo')
+                .then(function (res) {
+                    console.log(res.data);
+                    res.data.forEach(function (value, index) {
+                        console.log(value.todo);
+                        lists.push(value.todo);
+                    })
+                })
+        }
+        getLists();
     }
     registerList (e) {
         if(e) {
@@ -57,7 +67,7 @@ export class Todo extends React.Component{
                         <input type="text" onChange={(e) => this.getText(e) } value={this.state.text}/>
                         <Button buttonText="입력" onClick={ e => this.handleClick(e) }/>
                     </form>
-                </div>f
+                </div>
                 <ul className="filter-wrap">
                     <li><label><input type="radio" name="todo-list"/>todo</label></li>
                     <li><label><input type="radio" name="todo-list"/>doing</label></li>

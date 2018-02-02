@@ -19032,14 +19032,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-_react2.default.prototype.$http = _axios2.default;
-console.log(_react2.default.$http);
+var $http = _axios2.default;
 
 var Todo = exports.Todo = function (_React$Component) {
     _inherits(Todo, _React$Component);
 
     function Todo() {
         _classCallCheck(this, Todo);
+
+        $http.get('http://localhost:8000/todo').then(function (res) {
+            res.header('Access-Control-Allow-Origin', '*');
+            console.log(res);
+        });
 
         var _this = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this));
 
@@ -19115,7 +19119,6 @@ var Todo = exports.Todo = function (_React$Component) {
                             } })
                     )
                 ),
-                'f',
                 _react2.default.createElement(
                     'ul',
                     { className: 'filter-wrap' },
