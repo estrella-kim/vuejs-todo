@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../stylesheets/todo.css';
 import { Button } from '../components/index';
-import  axios  from 'axios';
+import axios from 'axios';
 
+
+const $http = axios;
 export class Todo extends React.Component{
     constructor () {
+        $http.get('http://localhost:8000/todo')
+            .then(function(res) {
+                console.log(res);
+            })
         super();
         this.state = {
             text : '',
@@ -24,7 +30,6 @@ export class Todo extends React.Component{
             lists : this.lists,
             text : ''
         })
-        console.log(axios)
     }
     getText (e) {
         const text = e.target.value;
@@ -68,3 +73,4 @@ export class Todo extends React.Component{
     }
 }
 ReactDOM.render(<Todo/>, document.getElementById('todo'));
+
