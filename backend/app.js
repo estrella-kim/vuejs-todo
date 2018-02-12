@@ -3,7 +3,7 @@ const path = require('path');
 
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');f
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -22,6 +22,9 @@ app.use(function(req, res, next) {
     next();
 });
 
+// view engine configuration
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 /**
  * @desc set api router
  */

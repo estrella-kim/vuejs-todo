@@ -19035,6 +19035,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var $http = _axios2.default;
 var lists = [];
 
+(0, _axios2.default)({
+    method: 'post',
+    url: 'http://localhost:8000/todo',
+    data: undefined.state
+});
+
 var Todo = exports.Todo = function (_React$Component) {
     _inherits(Todo, _React$Component);
 
@@ -19082,6 +19088,9 @@ var Todo = exports.Todo = function (_React$Component) {
                 lists: this.lists,
                 text: ''
             });
+            $http.post('http://localhost:8000/todo', this.state).then(function (res) {
+                console.log(res);
+            });
         }
     }, {
         key: 'getText',
@@ -19090,12 +19099,6 @@ var Todo = exports.Todo = function (_React$Component) {
             this.setState({
                 text: text
             });
-        }
-    }, {
-        key: 'handleClick',
-        value: function handleClick(e) {
-            e.preventDefault();
-            console.log('click');
         }
     }, {
         key: 'delete',
@@ -19129,13 +19132,14 @@ var Todo = exports.Todo = function (_React$Component) {
                                 return _this4.getText(e);
                             }, value: this.state.text }),
                         _react2.default.createElement(_index.Button, { buttonText: '\uC785\uB825', onClick: function onClick(e) {
-                                return _this4.handleClick(e);
+                                return _this4.registerList(e);
                             } })
                     )
                 ),
                 _react2.default.createElement(
                     'ul',
                     { className: 'filter-wrap' },
+                    'd',
                     _react2.default.createElement(
                         'li',
                         null,

@@ -6,7 +6,6 @@ import axios from 'axios';
 const $http = axios;
 const lists = [];
 
-
 export class Todo extends React.Component{
     constructor () {
         super();
