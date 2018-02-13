@@ -18292,10 +18292,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Button = function (_React$Component) {
     _inherits(Button, _React$Component);
 
-    function Button(props) {
+    function Button() {
         _classCallCheck(this, Button);
 
-        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
     }
 
     _createClass(Button, [{

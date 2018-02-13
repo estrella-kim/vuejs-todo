@@ -4,16 +4,15 @@ import '../stylesheets/todo.css';
 import { Button } from '../components/index';
 import axios from 'axios';
 const $http = axios;
-const lists = [];
 
 export class Todo extends React.Component{
     constructor () {
         super();
+        this.lists = [];
         this.state = {
             text : '',
-            lists : lists
+            lists : this.lists
         }
-        this.lists = lists;
     }
     componentDidMount () {
         let getLists = () => {
@@ -26,10 +25,10 @@ export class Todo extends React.Component{
                             text : value.todo,
                             status : value.isDone
                         }
-                        lists.push(list);
+                        _this.lists.push(list);
                     })
                     _this.setState({
-                        lists : lists
+                        lists : _this.lists
                     })
                 })
         }
@@ -41,7 +40,6 @@ export class Todo extends React.Component{
         }
         console.log('register');
         this.lists.push(this.state.text);
-        console.log(this.lists);
         this.setState({
             lists : this.lists,
             text : ''
@@ -54,24 +52,23 @@ export class Todo extends React.Component{
     filterLists (e) {
         const filter = e.target.value;
         const arr = [];
+        this.setState({
+            lists : this.lists
+        })
         if(filter === 'todo'){
-            this.state.lists.forEach(function(value, index){
+            this.lists.forEach(function(value, index){
                 if(value.status === 0) {
-                    return value;
+                    arr.push(value);
                 }
-                arr.push(value);
             })
-            console.log(arr);
             this.setState({
                 lists : arr
             })
-        }
-        if(filter === 'done') {
-            this.state.lists.forEach(function(value, index){
+        }else if(filter === 'done') {
+            this.lists.forEach(function(value, index){
                 if(value.status === 1) {
-                    return value;
+                    arr.push(value);
                 }
-                arr.push(value);
             })
             this.setState({
                 lists : arr
@@ -86,8 +83,7 @@ export class Todo extends React.Component{
         })
     }
     delete (index) {
-        console.log(index);
-        console.log('delete');
+        console.log('delete', index.target);
     }
     modify(index) {
         console.log(index);

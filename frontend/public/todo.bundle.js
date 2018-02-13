@@ -18601,10 +18601,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Button = function (_React$Component) {
     _inherits(Button, _React$Component);
 
-    function Button(props) {
+    function Button() {
         _classCallCheck(this, Button);
 
-        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
     }
 
     _createClass(Button, [{
@@ -19033,7 +19033,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var $http = _axios2.default;
-var lists = [];
 
 var Todo = exports.Todo = function (_React$Component) {
     _inherits(Todo, _React$Component);
@@ -19043,11 +19042,11 @@ var Todo = exports.Todo = function (_React$Component) {
 
         var _this2 = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this));
 
+        _this2.lists = [];
         _this2.state = {
             text: '',
-            lists: lists
+            lists: _this2.lists
         };
-        _this2.lists = lists;
         return _this2;
     }
 
@@ -19060,10 +19059,15 @@ var Todo = exports.Todo = function (_React$Component) {
                 var _this = _this3;
                 $http.get('http://localhost:8000/todo').then(function (res) {
                     res.data.forEach(function (value, index) {
-                        lists.push(value.todo);
+                        var list = {
+                            index: value.index,
+                            text: value.todo,
+                            status: value.isDone
+                        };
+                        _this.lists.push(list);
                     });
                     _this.setState({
-                        lists: lists
+                        lists: _this.lists
                     });
                 });
             };
@@ -19077,7 +19081,6 @@ var Todo = exports.Todo = function (_React$Component) {
             }
             console.log('register');
             this.lists.push(this.state.text);
-            console.log(this.lists);
             this.setState({
                 lists: this.lists,
                 text: ''
@@ -19085,6 +19088,34 @@ var Todo = exports.Todo = function (_React$Component) {
             $http.post('http://localhost:8000/todo', this.state).then(function (res) {
                 console.log(res);
             });
+        }
+    }, {
+        key: 'filterLists',
+        value: function filterLists(e) {
+            var filter = e.target.value;
+            var arr = [];
+            this.setState({
+                lists: this.lists
+            });
+            if (filter === 'todo') {
+                this.state.lists.forEach(function (value, index) {
+                    if (value.status === 0) {
+                        arr.push(value);
+                    }
+                });
+                this.setState({
+                    lists: arr
+                });
+            } else if (filter === 'done') {
+                this.state.lists.forEach(function (value, index) {
+                    if (value.status === 1) {
+                        arr.push(value);
+                    }
+                });
+                this.setState({
+                    lists: arr
+                });
+            }
         }
     }, {
         key: 'getText',
@@ -19097,8 +19128,7 @@ var Todo = exports.Todo = function (_React$Component) {
     }, {
         key: 'delete',
         value: function _delete(index) {
-            console.log(index);
-            console.log('delete');
+            console.log('delete', index.target);
         }
     }, {
         key: 'modify',
@@ -19139,7 +19169,21 @@ var Todo = exports.Todo = function (_React$Component) {
                         _react2.default.createElement(
                             'label',
                             null,
-                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list' }),
+                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list', value: 'all', onChange: function onChange(e) {
+                                    return _this4.filterLists(e);
+                                } }),
+                            'all'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list', value: 'todo', onChange: function onChange(e) {
+                                    return _this4.filterLists(e);
+                                } }),
                             'todo'
                         )
                     ),
@@ -19149,17 +19193,9 @@ var Todo = exports.Todo = function (_React$Component) {
                         _react2.default.createElement(
                             'label',
                             null,
-                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list' }),
-                            'doing'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list' }),
+                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list', value: 'done', onChange: function onChange(e) {
+                                    return _this4.filterLists(e);
+                                } }),
                             'done'
                         )
                     )
@@ -19174,7 +19210,9 @@ var Todo = exports.Todo = function (_React$Component) {
                             return _react2.default.createElement(
                                 'li',
                                 { key: i },
-                                v,
+                                v.index,
+                                v.status,
+                                v.text,
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick(i) {
                                         return _this4.delete(i);
                                     } }),
