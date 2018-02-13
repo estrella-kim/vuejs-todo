@@ -21,7 +21,12 @@ export class Todo extends React.Component{
             $http.get('http://localhost:8000/todo')
                 .then(function (res) {
                     res.data.forEach(function (value, index) {
-                        lists.push(value.todo);
+                        const list = {
+                            index : value.index,
+                            text : value.todo,
+                            status : value.isDone
+                        }
+                        lists.push(list);
                     })
                     _this.setState({
                         lists : lists
@@ -46,6 +51,34 @@ export class Todo extends React.Component{
                 console.log(res);
             })
     }
+    filterLists (e) {
+        const filter = e.target.value;
+        const arr = [];
+        if(filter === 'todo'){
+            this.state.lists.forEach(function(value, index){
+                if(value.status === 0) {
+                    return value;
+                }
+                arr.push(value);
+            })
+            console.log(arr);
+            this.setState({
+                lists : arr
+            })
+        }
+        if(filter === 'done') {
+            this.state.lists.forEach(function(value, index){
+                if(value.status === 1) {
+                    return value;
+                }
+                arr.push(value);
+            })
+            this.setState({
+                lists : arr
+            })
+        }
+
+    }
     getText (e) {
         const text = e.target.value;
         this.setState({
@@ -69,14 +102,14 @@ export class Todo extends React.Component{
                         <Button buttonText="입력" onClick={ e => this.registerList(e) }/>
                     </form>
                 </div>
-                <ul className="filter-wrap">d
-                    <li><label><input type="radio" name="todo-list"/>todo</label></li>
-                    <li><label><input type="radio" name="todo-list"/>doing</label></li>
-                    <li><label><input type="radio" name="todo-list"/>done</label></li>
+                <ul className="filter-wrap">
+                    <li><label><input type="radio" name="todo-list" value='all' onChange={(e) => this.filterLists(e)}/>all</label></li>
+                    <li><label><input type="radio" name="todo-list" value='todo' onChange={(e) => this.filterLists(e)}/>todo</label></li>
+                    <li><label><input type="radio" name="todo-list" value='done' onChange={(e) => this.filterLists(e)}/>done</label></li>
                 </ul>
                 <div className="lists-wrap">
                     <ul>
-                        { this.state.lists.map((v, i) => (<li key={i}>{v}<Button buttonText="삭제" onClick={ i => this.delete(i)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
+                        { this.state.lists.map((v, i) => (<li key={i}>{v.index}{v.status}{v.text}<Button buttonText="삭제" onClick={ i => this.delete(i)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
                     </ul>
                 </div>
             </div>

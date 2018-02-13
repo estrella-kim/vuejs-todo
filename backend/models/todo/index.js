@@ -4,7 +4,7 @@
 const database = require('../index');
 const connection = database.connection();
 
-const authModel = {
+const authModel = { 
     getLists : function(callback) {
         return connection.query('select * from todos', callback);
     },

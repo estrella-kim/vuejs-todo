@@ -19035,12 +19035,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var $http = _axios2.default;
 var lists = [];
 
-(0, _axios2.default)({
-    method: 'post',
-    url: 'http://localhost:8000/todo',
-    data: undefined.state
-});
-
 var Todo = exports.Todo = function (_React$Component) {
     _inherits(Todo, _React$Component);
 
@@ -19139,7 +19133,6 @@ var Todo = exports.Todo = function (_React$Component) {
                 _react2.default.createElement(
                     'ul',
                     { className: 'filter-wrap' },
-                    'd',
                     _react2.default.createElement(
                         'li',
                         null,
