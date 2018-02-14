@@ -74,7 +74,6 @@ export class Todo extends React.Component{
                 lists : arr
             })
         }
-
     }
     getText (e) {
         const text = e.target.value;
@@ -82,6 +81,13 @@ export class Todo extends React.Component{
             text : text
         })
     }
+    changeStatus (list) {
+        this.lists[list.index - 1].status = !this.lists[list.index - 1].status;
+       /* this.setState({
+            lists : this.lists
+        })*/
+    }
+
     delete (index) {
         console.log('delete', index.target);
     }
@@ -105,7 +111,7 @@ export class Todo extends React.Component{
                 </ul>
                 <div className="lists-wrap">
                     <ul>
-                        { this.state.lists.map((v, i) => (<li key={i}>{v.index}{v.status}{v.text}<Button buttonText="삭제" onClick={ i => this.delete(i)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
+                        { this.state.lists.map((v, i) => (<li key={i}><input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v) } />{v.index}{v.text}<Button buttonText="삭제" onClick={ i => this.delete(i)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
                     </ul>
                 </div>
             </div>

@@ -19098,7 +19098,7 @@ var Todo = exports.Todo = function (_React$Component) {
                 lists: this.lists
             });
             if (filter === 'todo') {
-                this.state.lists.forEach(function (value, index) {
+                this.lists.forEach(function (value, index) {
                     if (value.status === 0) {
                         arr.push(value);
                     }
@@ -19107,7 +19107,7 @@ var Todo = exports.Todo = function (_React$Component) {
                     lists: arr
                 });
             } else if (filter === 'done') {
-                this.state.lists.forEach(function (value, index) {
+                this.lists.forEach(function (value, index) {
                     if (value.status === 1) {
                         arr.push(value);
                     }
@@ -19123,6 +19123,14 @@ var Todo = exports.Todo = function (_React$Component) {
             var text = e.target.value;
             this.setState({
                 text: text
+            });
+        }
+    }, {
+        key: 'changeStatus',
+        value: function changeStatus(list) {
+            this.lists[list.index - 1].status = !this.lists[list.index - 1].status;
+            this.setState({
+                lists: this.lists
             });
         }
     }, {
@@ -19210,8 +19218,10 @@ var Todo = exports.Todo = function (_React$Component) {
                             return _react2.default.createElement(
                                 'li',
                                 { key: i },
+                                _react2.default.createElement('input', { type: 'checkbox', checked: v.status, onChange: function onChange() {
+                                        return _this4.changeStatus(v);
+                                    } }),
                                 v.index,
-                                v.status,
                                 v.text,
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick(i) {
                                         return _this4.delete(i);
