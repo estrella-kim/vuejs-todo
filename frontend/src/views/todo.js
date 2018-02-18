@@ -81,15 +81,25 @@ export class Todo extends React.Component{
             text : text
         })
     }
-    changeStatus (list) {
-        this.lists[list.index - 1].status = !this.lists[list.index - 1].status;
-       /* this.setState({
-            lists : this.lists
-        })*/
+    changeStatus (list, index) {
+        let arr = this.state.lists;
+        list.status = list.status === 1 ? 0 : 1;
+        arr[index].status = list.status;
+        this.setState({
+            lists : arr
+        })
+        $http.put('http://localhost:8000/todo', list)
+            .then(function(res){
+                console.log(res);
+            })
     }
 
-    delete (index) {
-        console.log('delete', index.target);
+    delete (list) {
+        console.log(list.index);
+        $http.delete('http://localhost:8000/todo', {params: {index: list.index}})
+            .then(function(res){
+                console.log(res);
+            })
     }
     modify(index) {
         console.log(index);
@@ -111,7 +121,7 @@ export class Todo extends React.Component{
                 </ul>
                 <div className="lists-wrap">
                     <ul>
-                        { this.state.lists.map((v, i) => (<li key={i}><input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v) } />{v.index}{v.text}<Button buttonText="삭제" onClick={ i => this.delete(i)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
+                        { this.state.lists.map((v, i) => (<li key={i}><input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />{v.index}{v.text}<Button buttonText="삭제" onClick={ () => this.delete(v)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
                     </ul>
                 </div>
             </div>

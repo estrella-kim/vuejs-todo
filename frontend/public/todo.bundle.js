@@ -19127,10 +19127,15 @@ var Todo = exports.Todo = function (_React$Component) {
         }
     }, {
         key: 'changeStatus',
-        value: function changeStatus(list) {
-            this.lists[list.index - 1].status = !this.lists[list.index - 1].status;
+        value: function changeStatus(list, index) {
+            var arr = this.state.lists;
+            list.status = list.status === 1 ? 0 : 1;
+            arr[index].status = list.status;
             this.setState({
-                lists: this.lists
+                lists: arr
+            });
+            $http.put('http://localhost:8000/todo', list).then(function (res) {
+                console.log(res);
             });
         }
     }, {
@@ -19219,7 +19224,7 @@ var Todo = exports.Todo = function (_React$Component) {
                                 'li',
                                 { key: i },
                                 _react2.default.createElement('input', { type: 'checkbox', checked: v.status, onChange: function onChange() {
-                                        return _this4.changeStatus(v);
+                                        return _this4.changeStatus(v, i);
                                     } }),
                                 v.index,
                                 v.text,

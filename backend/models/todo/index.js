@@ -9,9 +9,15 @@ const authModel = {
         return connection.query('select * from todos', callback);
     },
     insertLists : function(req, callback) {
-        console.log(req.text);
-        var arr = [ req.text, 0];
+        let arr = [ req.text, 0];
         return connection.query( 'insert into todos(todo, isDone) values(?,?)', arr, callback);
+    },
+    updateLists : function(req, callback) {
+        let arr = [req.status, req.index];
+        return connection.query('update todos set isDone = ? where `index` = ?' , arr , callback);
+    },
+    deleteLists : function(req, callback) {
+        return connection.query('delete from todos where `index` = ?', req.index, callback );
     }
 };
 
