@@ -88,7 +88,7 @@ export class Todo extends React.Component{
         this.setState({
             lists : arr
         })
-        $http.put('http://localhost:8000/todo', list)
+        $http.put('http://localhost:8000/todo', { status : list.status, index : list.index } )
             .then(function(res){
                 console.log(res);
             })
@@ -101,9 +101,22 @@ export class Todo extends React.Component{
                 console.log(res);
             })
     }
-    modify(index) {
+    edit(index) {
         console.log(index);
         console.log('modify');
+    }
+    editText(event, index, list) {
+        this.lists[index].text = event.target.value;
+        this.setState({
+            lists : this.lists
+        })
+    }
+    registerEdited(event, list) {
+        event.preventDefault();
+        $http.put('http://localhost:8000/todo', { index : list.index, text : list.text })
+            .then(function(res){
+                console.log(res);
+            })
     }
     render () {
         return (
@@ -121,7 +134,16 @@ export class Todo extends React.Component{
                 </ul>
                 <div className="lists-wrap">
                     <ul>
-                        { this.state.lists.map((v, i) => (<li key={i}><input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />{v.index}{v.text}<Button buttonText="삭제" onClick={ () => this.delete(v)}/><Button buttonText="수정" onClick={ i => this.modify(i) }/></li>))}
+                        { this.state.lists.map((v, i) => (
+                            <li key={i}>
+                                <input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />
+                                <span onDoubleClick={() => this.edit()}>{v.index}{v.text}</span>
+                                <form onSubmit={(e) => this.registerEdited(e, v)}>
+                                    <input type="text" value={v.text} onChange={(e) => this.editText(e, i, v)}/>
+                                </form>
+                                <Button buttonText="삭제" onClick={ () => this.delete(v)}/><Button buttonText="수정" onClick={ () => this.edit(v) }/>
+                            </li>)
+                        )}
                     </ul>
                 </div>
             </div>

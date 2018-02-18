@@ -13,6 +13,10 @@ const authModel = {
         return connection.query( 'insert into todos(todo, isDone) values(?,?)', arr, callback);
     },
     updateLists : function(req, callback) {
+        if(req.text) {
+            let arr = [req.text, req.index];
+            return connection.query('update todos set todo = ? where `index` = ?' , arr , callback);
+        }
         let arr = [req.status, req.index];
         return connection.query('update todos set isDone = ? where `index` = ?' , arr , callback);
     },

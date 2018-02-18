@@ -1,7 +1,6 @@
 const todoModels = require('../../models/todo/index');
 
 exports.getLists = (req, res, next) => {
-    console.log(req.query);
     todoModels.getLists(function(error, results) {
         res.json(results);
     });
