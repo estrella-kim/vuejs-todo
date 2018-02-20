@@ -19134,20 +19134,39 @@ var Todo = exports.Todo = function (_React$Component) {
             this.setState({
                 lists: arr
             });
-            $http.put('http://localhost:8000/todo', list).then(function (res) {
+            $http.put('http://localhost:8000/todo', { status: list.status, index: list.index }).then(function (res) {
                 console.log(res);
             });
         }
     }, {
         key: 'delete',
-        value: function _delete(index) {
-            console.log('delete', index.target);
+        value: function _delete(list) {
+            console.log(list.index);
+            $http.delete('http://localhost:8000/todo', { params: { index: list.index } }).then(function (res) {
+                console.log(res);
+            });
         }
     }, {
-        key: 'modify',
-        value: function modify(index) {
+        key: 'edit',
+        value: function edit(index) {
             console.log(index);
             console.log('modify');
+        }
+    }, {
+        key: 'editText',
+        value: function editText(event, index, list) {
+            this.lists[index].text = event.target.value;
+            this.setState({
+                lists: this.lists
+            });
+        }
+    }, {
+        key: 'registerEdited',
+        value: function registerEdited(event, list) {
+            event.preventDefault();
+            $http.put('http://localhost:8000/todo', { index: list.index, text: list.text }).then(function (res) {
+                console.log(res);
+            });
         }
     }, {
         key: 'render',
@@ -19226,13 +19245,28 @@ var Todo = exports.Todo = function (_React$Component) {
                                 _react2.default.createElement('input', { type: 'checkbox', checked: v.status, onChange: function onChange() {
                                         return _this4.changeStatus(v, i);
                                     } }),
-                                v.index,
-                                v.text,
-                                _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick(i) {
-                                        return _this4.delete(i);
+                                _react2.default.createElement(
+                                    'span',
+                                    { onDoubleClick: function onDoubleClick() {
+                                            return _this4.edit();
+                                        } },
+                                    v.index,
+                                    v.text
+                                ),
+                                _react2.default.createElement(
+                                    'form',
+                                    { onSubmit: function onSubmit(e) {
+                                            return _this4.registerEdited(e, v);
+                                        } },
+                                    _react2.default.createElement('input', { type: 'text', value: v.text, onChange: function onChange(e) {
+                                            return _this4.editText(e, i, v);
+                                        } })
+                                ),
+                                _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick() {
+                                        return _this4.delete(v);
                                     } }),
-                                _react2.default.createElement(_index.Button, { buttonText: '\uC218\uC815', onClick: function onClick(i) {
-                                        return _this4.modify(i);
+                                _react2.default.createElement(_index.Button, { buttonText: '\uC218\uC815', onClick: function onClick() {
+                                        return _this4.edit(v);
                                     } })
                             );
                         })
