@@ -94,6 +94,10 @@ export class Todo extends React.Component{
     }
 
     delete (list) {
+        delete this.lists[list.index - 1];
+        this.setState({
+            lists : this.lists
+        })
         $http.delete('http://localhost:8000/todo', {params: {index: list.index}})
             .then(function(res){
                 console.log(res);
