@@ -9,10 +9,10 @@ export class Todo extends React.Component{
     constructor () {
         super();
         this.lists = [];
-        this.filterType = 'all';
         this.state = {
             text : '',
-            lists : this.lists
+            lists : this.lists,
+            filterType : 'all'
         }
     }
     componentDidMount () {
@@ -39,28 +39,28 @@ export class Todo extends React.Component{
         if(e) {
             e.preventDefault();
         }
-        this.lists.push(this.state.text);
         if(this.filterType !== 'done') {
+            this.lists.push(this.state.text);
             this.setState({
                 lists : this.lists,
                 text : ''
             })
         }
 
-        $http.post('http://localhost:8000/todo', this.lists)
+        $http.post('http://localhost:8000/todo', this.state.text)
             .then(function(res){
                 console.log(res);
             })
     }
     filterLists (e) {
-        const filter = e.target;
-        console.log(filter);
+        const filterType = e.target.value;
         const arr = [];
-        this.filterType = filter;
         this.setState({
-            lists : this.lists
+            lists : this.lists,
+            filterType : filterType
         })
-        if(this.filterType === 'todo'){
+        if(filterType === 'todo'){
+            console.log('todo');
             this.lists.forEach(function(value, index){
                 if(value.status === 0) {
                     arr.push(value);
@@ -69,7 +69,8 @@ export class Todo extends React.Component{
             this.setState({
                 lists : arr
             })
-        }else if(this.filterType === 'done') {
+        }else if(filterType === 'done') {
+            console.log('done');
             this.lists.forEach(function(value, index){
                 if(value.status === 1) {
                     arr.push(value);
@@ -133,15 +134,15 @@ export class Todo extends React.Component{
         return (
             <div>
                 <div className="write-list">
-                    <form onSubmit={(e) => this.registerList(e)}>
+                    <form onSubmit={ (e) => this.registerList(e)}>
                         <input type="text" onChange={(e) => this.getText(e) } value={this.state.text}/>
-                        <Button buttonText="입력" onClick={ e => this.registerList(e) }/>
+                        <Button buttonText="입력" onClick={ (e) => this.registerList(e) }/>
                     </form>
                 </div>
                 <ul className="filter-wrap">
-                    <li><label><input type="radio" name="todo-list" value={this.filterType} onChange={(e) => this.filterLists(e)}/>all</label></li>
-                    <li><label><input type="radio" name="todo-list" value={this.filterType} onChange={(e) => this.filterLists(e)}/>todo</label></li>
-                    <li><label><input type="radio" name="todo-list" value={this.filterType} onChange={(e) => this.filterLists(e)}/>done</label></li>
+                    <li><label><input type="radio" name="todo-list" value="all" defaultChecked ={ this.state.filterType} onChange={(e) => this.filterLists(e)}/>all</label></li>
+                    <li><label ><input type="radio" name="todo-list" value="todo" onChange={(e) => this.filterLists(e)}/>todo</label></li>
+                    <li><label ><input type="radio" name="todo-list" value="done" onChange={(e) => this.filterLists(e)}/>done</label></li>
                 </ul>
                 <div className="lists-wrap">
                     <ul>
