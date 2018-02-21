@@ -11,8 +11,7 @@ export class Todo extends React.Component{
         this.lists = [];
         this.state = {
             text : '',
-            lists : this.lists,
-            editValue : false
+            lists : this.lists
         }
     }
     componentDidMount () {
@@ -39,7 +38,6 @@ export class Todo extends React.Component{
         if(e) {
             e.preventDefault();
         }
-        console.log('register');
         this.lists.push(this.state.text);
         this.setState({
             lists : this.lists,
@@ -96,14 +94,17 @@ export class Todo extends React.Component{
     }
 
     delete (list) {
-        console.log(list.index);
         $http.delete('http://localhost:8000/todo', {params: {index: list.index}})
             .then(function(res){
                 console.log(res);
             })
     }
-    edit() {
-        this.setState({editValue : true});
+    edit(index) {
+        this.lists[index].editValue = true;
+        console.log(this.lists[index]);
+        this.setState({
+            lists : this.lists
+        })
     }
     editText(event, index, list) {
         this.lists[index].text = event.target.value;
@@ -137,11 +138,9 @@ export class Todo extends React.Component{
                         { this.state.lists.map((v, i) => (
                             <li key={i}>
                                 <input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />
-                                { !this.state.editValue ? (<span>{v.index}{v.text}</span>)
-                                    : (<form onSubmit={(e) => this.registerEdited(e, v)}>
-                                    <EditInput value={v.text} onChange={(e) => this.editText(e, i, v)} />
-                                </form>) }
-                                <Button buttonText="삭제" onClick={ () => this.delete(v)}/><Button buttonText="수정" onClick={ () => this.edit() }/>
+                                { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><EditInput value={v.text} onChange={(e) => this.editText(e, i, v)} /></form>)
+                                    : (<span>{v.index}{v.text}</span>) }
+                                <Button buttonText="삭제" onClick={ () => this.delete(v)}/><Button buttonText="수정" onClick={ () => this.edit(i) }/>
                             </li>)
                         )}
                     </ul>
