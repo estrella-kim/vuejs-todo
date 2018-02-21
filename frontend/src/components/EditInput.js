@@ -6,9 +6,7 @@ export default class EditInput extends React.Component{
     }
     render () {
         return(
-            <form onSubmit={this.props.onSubmit}>
-                <input type="text" value={this.props.text} onChange={this.props.onChange}/>
-            </form>
+            <input type="text" value={this.props.value} onChange={this.props.onChange}/>
         )
     }
 }

@@ -11,9 +11,9 @@ export class Todo extends React.Component{
         this.lists = [];
         this.state = {
             text : '',
-            lists : this.lists
+            lists : this.lists,
+            editValue : false
         }
-        this.editValue = false;
     }
     componentDidMount () {
         let getLists = () => {
@@ -103,9 +103,7 @@ export class Todo extends React.Component{
             })
     }
     edit() {
-        /*let element = this.refs['editInput' + index];
-        */
-        this.editValue = true;
+        this.setState({editValue : true});
     }
     editText(event, index, list) {
         this.lists[index].text = event.target.value;
@@ -139,8 +137,10 @@ export class Todo extends React.Component{
                         { this.state.lists.map((v, i) => (
                             <li key={i}>
                                 <input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />
-                                <span>{v.index}{v.text}</span>
-                                <EditInput onSubmit={(e) => this.registerEdited(e, v)} value={v.text} onChange={(e) => this.props.editText(e, i, v)}/>
+                                { !this.state.editValue ? (<span>{v.index}{v.text}</span>)
+                                    : (<form onSubmit={(e) => this.registerEdited(e, v)}>
+                                    <EditInput value={v.text} onChange={(e) => this.editText(e, i, v)} />
+                                </form>) }
                                 <Button buttonText="삭제" onClick={ () => this.delete(v)}/><Button buttonText="수정" onClick={ () => this.edit() }/>
                             </li>)
                         )}
