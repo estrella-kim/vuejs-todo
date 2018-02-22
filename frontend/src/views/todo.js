@@ -39,18 +39,21 @@ export class Todo extends React.Component{
         if(e) {
             e.preventDefault();
         }
+        const array = this.state.lists;
         const obj = {
             text : this.state.text,
-            status : 0
+            status : 0,
+            editValue : false
         }
-        if(this.filterType !== 'done') {
-            this.lists.push(obj);
+        if(this.state.filterType !== 'done') {
+            array.push(obj);
             this.setState({
-                lists : this.lists,
+                lists : array,
                 text : ''
             })
+        }else {
+            this.lists.push(obj);
         }
-
         $http.post('http://localhost:8000/todo', obj)
             .then(function(res){
                 console.log(res);
@@ -64,7 +67,6 @@ export class Todo extends React.Component{
             filterType : filterType
         })
         if(filterType === 'todo'){
-            console.log('todo');
             this.lists.forEach(function(value, index){
                 if(value.status === 0) {
                     arr.push(value);
@@ -74,7 +76,6 @@ export class Todo extends React.Component{
                 lists : arr
             })
         }else if(filterType === 'done') {
-            console.log('done');
             this.lists.forEach(function(value, index){
                 if(value.status === 1) {
                     arr.push(value);
@@ -117,12 +118,13 @@ export class Todo extends React.Component{
 
     }
     edit(index) {
+        console.log(this.lists);
         this.lists[index].editValue = true;
         this.setState({
             lists : this.lists
         })
     }
-    editText(event, index, list) {
+    editText(event, index) {
         this.lists[index].text = event.target.value;
         this.setState({
             lists : this.lists
@@ -159,7 +161,7 @@ export class Todo extends React.Component{
                         { this.state.lists.map((v, i) => (
                             <li key={i}>
                                 <input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />
-                                { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><EditInput value={v.text} onChange={(e) => this.editText(e, i, v)} /></form>)
+                                { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><EditInput value={v.text} onChange={(e) => this.editText(e, i)} /></form>)
                                     : (<span>{v.index}{v.text}</span>) }
                                 <Button buttonText="삭제" onClick={ () => this.delete(v, i)}/><Button buttonText="수정" onClick={ () => this.edit(i) }/>
                             </li>)
