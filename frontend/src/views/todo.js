@@ -118,7 +118,6 @@ export class Todo extends React.Component{
     }
     edit(index) {
         this.lists[index].editValue = true;
-        console.log(this.lists[index]);
         this.setState({
             lists : this.lists
         })
@@ -130,10 +129,15 @@ export class Todo extends React.Component{
         })
     }
     registerEdited(event, list) {
+        const _this = this;
         event.preventDefault();
         $http.put('http://localhost:8000/todo', { index : list.index, text : list.text })
             .then(function(res){
                 console.log(res);
+                list.editValue = false;
+                _this.setState({
+                    lists : _this.lists
+                })
             })
     }
     render () {
