@@ -39,15 +39,19 @@ export class Todo extends React.Component{
         if(e) {
             e.preventDefault();
         }
+        const obj = {
+            text : this.state.text,
+            status : 0
+        }
         if(this.filterType !== 'done') {
-            this.lists.push(this.state.text);
+            this.lists.push(obj);
             this.setState({
                 lists : this.lists,
                 text : ''
             })
         }
 
-        $http.post('http://localhost:8000/todo', this.state.text)
+        $http.post('http://localhost:8000/todo', obj)
             .then(function(res){
                 console.log(res);
             })
@@ -100,15 +104,17 @@ export class Todo extends React.Component{
             })
     }
 
-    delete (list) {
-        delete this.lists[list.index - 1];
-        this.setState({
-            lists : this.lists
-        })
+    delete (list, index) {
+        const _this = this;
+        delete this.lists[index];
         $http.delete('http://localhost:8000/todo', {params: {index: list.index}})
             .then(function(res){
                 console.log(res);
+                _this.setState({
+                    lists : _this.lists
+                })
             })
+
     }
     edit(index) {
         this.lists[index].editValue = true;
@@ -151,7 +157,7 @@ export class Todo extends React.Component{
                                 <input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />
                                 { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><EditInput value={v.text} onChange={(e) => this.editText(e, i, v)} /></form>)
                                     : (<span>{v.index}{v.text}</span>) }
-                                <Button buttonText="삭제" onClick={ () => this.delete(v)}/><Button buttonText="수정" onClick={ () => this.edit(i) }/>
+                                <Button buttonText="삭제" onClick={ () => this.delete(v, i)}/><Button buttonText="수정" onClick={ () => this.edit(i) }/>
                             </li>)
                         )}
                     </ul>

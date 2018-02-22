@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 36);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -302,8 +302,8 @@ module.exports = emptyFunction;
 "use strict";
 
 
-var bind = __webpack_require__(30);
-var isBuffer = __webpack_require__(44);
+var bind = __webpack_require__(31);
+var isBuffer = __webpack_require__(45);
 
 /*global toString:true*/
 
@@ -18571,6 +18571,15 @@ Object.defineProperty(exports, 'Button', {
   }
 });
 
+var _EditInput = __webpack_require__(29);
+
+Object.defineProperty(exports, 'EditInput', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_EditInput).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
@@ -18629,10 +18638,56 @@ exports.default = Button;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EditInput = function (_React$Component) {
+    _inherits(EditInput, _React$Component);
+
+    function EditInput(props) {
+        _classCallCheck(this, EditInput);
+
+        return _possibleConstructorReturn(this, (EditInput.__proto__ || Object.getPrototypeOf(EditInput)).call(this, props));
+    }
+
+    _createClass(EditInput, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement("input", { type: "text", value: this.props.value, onChange: this.props.onChange });
+        }
+    }]);
+
+    return EditInput;
+}(_react2.default.Component);
+
+exports.default = EditInput;
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(2);
-var normalizeHeaderName = __webpack_require__(46);
+var normalizeHeaderName = __webpack_require__(47);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -18648,10 +18703,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(31);
+    adapter = __webpack_require__(32);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(31);
+    adapter = __webpack_require__(32);
   }
   return adapter;
 }
@@ -18725,7 +18780,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18743,19 +18798,19 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(2);
-var settle = __webpack_require__(47);
-var buildURL = __webpack_require__(49);
-var parseHeaders = __webpack_require__(50);
-var isURLSameOrigin = __webpack_require__(51);
-var createError = __webpack_require__(32);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(52);
+var settle = __webpack_require__(48);
+var buildURL = __webpack_require__(50);
+var parseHeaders = __webpack_require__(51);
+var isURLSameOrigin = __webpack_require__(52);
+var createError = __webpack_require__(33);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(53);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -18852,7 +18907,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(53);
+      var cookies = __webpack_require__(54);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -18931,13 +18986,13 @@ module.exports = function xhrAdapter(config) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(48);
+var enhanceError = __webpack_require__(49);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -18956,7 +19011,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18968,7 +19023,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18994,8 +19049,8 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 35 */,
-/* 36 */
+/* 36 */,
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19016,11 +19071,11 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-__webpack_require__(37);
+__webpack_require__(38);
 
 var _index = __webpack_require__(27);
 
-var _axios = __webpack_require__(42);
+var _axios = __webpack_require__(43);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -19045,7 +19100,8 @@ var Todo = exports.Todo = function (_React$Component) {
         _this2.lists = [];
         _this2.state = {
             text: '',
-            lists: _this2.lists
+            lists: _this2.lists,
+            filterType: 'all'
         };
         return _this2;
     }
@@ -19079,25 +19135,29 @@ var Todo = exports.Todo = function (_React$Component) {
             if (e) {
                 e.preventDefault();
             }
-            console.log('register');
-            this.lists.push(this.state.text);
-            this.setState({
-                lists: this.lists,
-                text: ''
-            });
-            $http.post('http://localhost:8000/todo', this.state).then(function (res) {
+            if (this.filterType !== 'done') {
+                this.lists.push(this.state.text);
+                this.setState({
+                    lists: this.lists,
+                    text: ''
+                });
+            }
+
+            $http.post('http://localhost:8000/todo', this.state.text).then(function (res) {
                 console.log(res);
             });
         }
     }, {
         key: 'filterLists',
         value: function filterLists(e) {
-            var filter = e.target.value;
+            var filterType = e.target.value;
             var arr = [];
             this.setState({
-                lists: this.lists
+                lists: this.lists,
+                filterType: filterType
             });
-            if (filter === 'todo') {
+            if (filterType === 'todo') {
+                console.log('todo');
                 this.lists.forEach(function (value, index) {
                     if (value.status === 0) {
                         arr.push(value);
@@ -19106,7 +19166,8 @@ var Todo = exports.Todo = function (_React$Component) {
                 this.setState({
                     lists: arr
                 });
-            } else if (filter === 'done') {
+            } else if (filterType === 'done') {
+                console.log('done');
                 this.lists.forEach(function (value, index) {
                     if (value.status === 1) {
                         arr.push(value);
@@ -19141,7 +19202,10 @@ var Todo = exports.Todo = function (_React$Component) {
     }, {
         key: 'delete',
         value: function _delete(list) {
-            console.log(list.index);
+            delete this.lists[list.index - 1];
+            this.setState({
+                lists: this.lists
+            });
             $http.delete('http://localhost:8000/todo', { params: { index: list.index } }).then(function (res) {
                 console.log(res);
             });
@@ -19149,8 +19213,11 @@ var Todo = exports.Todo = function (_React$Component) {
     }, {
         key: 'edit',
         value: function edit(index) {
-            console.log(index);
-            console.log('modify');
+            this.lists[index].editValue = true;
+            console.log(this.lists[index]);
+            this.setState({
+                lists: this.lists
+            });
         }
     }, {
         key: 'editText',
@@ -19201,7 +19268,7 @@ var Todo = exports.Todo = function (_React$Component) {
                         _react2.default.createElement(
                             'label',
                             null,
-                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list', value: 'all', onChange: function onChange(e) {
+                            _react2.default.createElement('input', { type: 'radio', name: 'todo-list', value: 'all', defaultChecked: this.state.filterType, onChange: function onChange(e) {
                                     return _this4.filterLists(e);
                                 } }),
                             'all'
@@ -19245,28 +19312,25 @@ var Todo = exports.Todo = function (_React$Component) {
                                 _react2.default.createElement('input', { type: 'checkbox', checked: v.status, onChange: function onChange() {
                                         return _this4.changeStatus(v, i);
                                     } }),
-                                _react2.default.createElement(
-                                    'span',
-                                    { onDoubleClick: function onDoubleClick() {
-                                            return _this4.edit();
-                                        } },
-                                    v.index,
-                                    v.text
-                                ),
-                                _react2.default.createElement(
+                                v.editValue ? _react2.default.createElement(
                                     'form',
                                     { onSubmit: function onSubmit(e) {
                                             return _this4.registerEdited(e, v);
                                         } },
-                                    _react2.default.createElement('input', { type: 'text', value: v.text, onChange: function onChange(e) {
+                                    _react2.default.createElement(_index.EditInput, { value: v.text, onChange: function onChange(e) {
                                             return _this4.editText(e, i, v);
                                         } })
+                                ) : _react2.default.createElement(
+                                    'span',
+                                    null,
+                                    v.index,
+                                    v.text
                                 ),
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick() {
                                         return _this4.delete(v);
                                     } }),
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC218\uC815', onClick: function onClick() {
-                                        return _this4.edit(v);
+                                        return _this4.edit(i);
                                     } })
                             );
                         })
@@ -19282,13 +19346,13 @@ var Todo = exports.Todo = function (_React$Component) {
 _reactDom2.default.render(_react2.default.createElement(Todo, null), document.getElementById('todo'));
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(38);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -19296,7 +19360,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(40)(content, options);
+var update = __webpack_require__(41)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -19313,10 +19377,10 @@ if(false) {
 }
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(39)(false);
+exports = module.exports = __webpack_require__(40)(false);
 // imports
 
 
@@ -19327,7 +19391,7 @@ exports.push([module.i, "/* defatul */\r\nul, li{\r\n    list-style :none;\r\n}\
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /*
@@ -19409,7 +19473,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -19465,7 +19529,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(41);
+var	fixUrls = __webpack_require__(42);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -19781,7 +19845,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 
@@ -19876,22 +19940,22 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(43);
+module.exports = __webpack_require__(44);
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(2);
-var bind = __webpack_require__(30);
-var Axios = __webpack_require__(45);
-var defaults = __webpack_require__(29);
+var bind = __webpack_require__(31);
+var Axios = __webpack_require__(46);
+var defaults = __webpack_require__(30);
 
 /**
  * Create an instance of Axios
@@ -19924,15 +19988,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(34);
-axios.CancelToken = __webpack_require__(59);
-axios.isCancel = __webpack_require__(33);
+axios.Cancel = __webpack_require__(35);
+axios.CancelToken = __webpack_require__(60);
+axios.isCancel = __webpack_require__(34);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(60);
+axios.spread = __webpack_require__(61);
 
 module.exports = axios;
 
@@ -19941,7 +20005,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 /*!
@@ -19968,16 +20032,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(29);
+var defaults = __webpack_require__(30);
 var utils = __webpack_require__(2);
-var InterceptorManager = __webpack_require__(54);
-var dispatchRequest = __webpack_require__(55);
+var InterceptorManager = __webpack_require__(55);
+var dispatchRequest = __webpack_require__(56);
 
 /**
  * Create a new instance of Axios
@@ -20054,7 +20118,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20073,13 +20137,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(32);
+var createError = __webpack_require__(33);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -20106,7 +20170,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20134,7 +20198,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20209,7 +20273,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20269,7 +20333,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20344,7 +20408,7 @@ module.exports = (
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20387,7 +20451,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20447,7 +20511,7 @@ module.exports = (
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20506,18 +20570,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(2);
-var transformData = __webpack_require__(56);
-var isCancel = __webpack_require__(33);
-var defaults = __webpack_require__(29);
-var isAbsoluteURL = __webpack_require__(57);
-var combineURLs = __webpack_require__(58);
+var transformData = __webpack_require__(57);
+var isCancel = __webpack_require__(34);
+var defaults = __webpack_require__(30);
+var isAbsoluteURL = __webpack_require__(58);
+var combineURLs = __webpack_require__(59);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -20599,7 +20663,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20626,7 +20690,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20647,7 +20711,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20668,13 +20732,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(34);
+var Cancel = __webpack_require__(35);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -20732,7 +20796,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

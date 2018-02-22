@@ -9,7 +9,7 @@ const authModel = {
         return connection.query('select * from todos', callback);
     },
     insertLists : function(req, callback) {
-        let arr = [ req.text, 0];
+        let arr = [ req.text, req.status];
         return connection.query( 'insert into todos(todo, isDone) values(?,?)', arr, callback);
     },
     updateLists : function(req, callback) {
