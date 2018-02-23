@@ -14,6 +14,7 @@ module.exports = {
         "space-in-parens" : 0,
         "no-multi-spaces" : 1,
         "spaced-comment" : 0,
-        "space-before-function-paren" : 0
+        "space-before-function-paren" : 0,
+        "no-tabs" : 0
     }
 };

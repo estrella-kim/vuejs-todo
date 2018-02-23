@@ -6,7 +6,7 @@ import axios from 'axios';
 const $http = axios;
 
 export class Todo extends React.Component{
-    constructor () {
+    constructor (nextState) {
         super();
         this.lists = [];
         this.state = {
@@ -35,6 +35,13 @@ export class Todo extends React.Component{
         }
         getLists();
     }
+   /* shouldComponentUpdate (nextState) {
+            for(let i = 0; i < this.state.lists.length; i++ ) {
+                return (
+					nextState.lists[i].status !== this.state.lists[i].status
+                )
+            };
+    }*/
     registerList (e) {
         if(e) {
             e.preventDefault();
@@ -45,14 +52,12 @@ export class Todo extends React.Component{
             status : 0,
             editValue : false
         }
+        this.lists.push(obj);
         if(this.state.filterType !== 'done') {
-            array.push(obj);
             this.setState({
-                lists : array,
+                lists : this.lists,
                 text : ''
             })
-        }else {
-            this.lists.push(obj);
         }
         $http.post('http://localhost:8000/todo', obj)
             .then(function(res){
@@ -60,7 +65,12 @@ export class Todo extends React.Component{
             })
     }
     filterLists (e) {
-        const filterType = e.target.value;
+        var filterType = '';
+        if(e) {
+			filterType = e.target.value;
+        }else{
+			filterType = this.state.filterType
+        }
         const arr = [];
         this.setState({
             lists : this.lists,
@@ -103,6 +113,7 @@ export class Todo extends React.Component{
             .then(function(res){
                 console.log(res);
             })
+        this.filterLists();
     }
 
     delete (list, index) {
@@ -118,7 +129,6 @@ export class Todo extends React.Component{
 
     }
     edit(index) {
-        console.log(this.lists);
         this.lists[index].editValue = true;
         this.setState({
             lists : this.lists
@@ -137,9 +147,11 @@ export class Todo extends React.Component{
             .then(function(res){
                 console.log(res);
                 list.editValue = false;
-                _this.setState({
-                    lists : _this.lists
-                })
+                if(this.filterType !== 'done') {
+                    _this.setState({
+                        lists: _this.lists
+                    })
+                }
             })
     }
     render () {
