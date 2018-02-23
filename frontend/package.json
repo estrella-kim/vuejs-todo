@@ -19,6 +19,7 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
+    "antd": "^3.2.1",
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
