@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../stylesheets/todo.css';
+import './todo.css';
+import { Checkbox, Icon } from 'antd';
+import 'antd/dist/antd.css';
 import { Button, EditInput } from '../components/index';
 import axios from 'axios';
 const $http = axios;
@@ -43,25 +45,26 @@ export class Todo extends React.Component{
             };
     }*/
     registerList (e) {
+        const _this = this;
+
         if(e) {
             e.preventDefault();
         }
-        const array = this.state.lists;
         const obj = {
             text : this.state.text,
             status : 0,
             editValue : false
         }
         this.lists.push(obj);
-        if(this.state.filterType !== 'done') {
-            this.setState({
-                lists : this.lists,
-                text : ''
-            })
-        }
         $http.post('http://localhost:8000/todo', obj)
             .then(function(res){
                 console.log(res);
+                if(_this.state.filterType !== 'done') {
+                    _this.setState({
+                        lists : _this.lists,
+                        text : ''
+                    })
+                }
             })
     }
     filterLists (e) {
@@ -129,7 +132,7 @@ export class Todo extends React.Component{
 
     }
     edit(index) {
-        this.lists[index].editValue = true;
+        this.lists[index].editValue = !this.lists[index].editValue;
         this.setState({
             lists : this.lists
         })
@@ -147,7 +150,7 @@ export class Todo extends React.Component{
             .then(function(res){
                 console.log(res);
                 list.editValue = false;
-                if(this.filterType !== 'done') {
+                if(_this.filterType !== 'done') {
                     _this.setState({
                         lists: _this.lists
                     })
@@ -172,10 +175,11 @@ export class Todo extends React.Component{
                     <ul>
                         { this.state.lists.map((v, i) => (
                             <li key={i}>
-                                <input type="checkbox" checked={v.status} onChange={ () => this.changeStatus(v, i) } />
-                                { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><EditInput value={v.text} onChange={(e) => this.editText(e, i)} /></form>)
-                                    : (<span>{v.index}{v.text}</span>) }
-                                <Button buttonText="삭제" onClick={ () => this.delete(v, i)}/><Button buttonText="수정" onClick={ () => this.edit(i) }/>
+                                <Checkbox checked={v.status} onChange={ () => this.changeStatus(v, i) }>
+                                { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><EditInput value={v.text} onBlur={ () => this.edit(i) } onChange={(e) => this.editText(e, i)} /></form>)
+                                    : (<span onDoubleClick={ () => this.edit(i)}>{v.index}{v.text}</span>) }
+                                </Checkbox>
+                                <Icon type="close" onClick={ () => this.delete(v, i)}/>
                             </li>)
                         )}
                     </ul>

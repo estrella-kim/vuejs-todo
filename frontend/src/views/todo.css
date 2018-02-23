@@ -16,3 +16,7 @@ ul, li{
 .write-list{
     margin-bottom : 30px;
 }
+.anticon-close{
+    float:right;
+    color: #ff5346;
+}

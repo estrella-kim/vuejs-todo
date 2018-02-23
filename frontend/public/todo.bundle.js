@@ -19092,7 +19092,7 @@ var $http = _axios2.default;
 var Todo = exports.Todo = function (_React$Component) {
     _inherits(Todo, _React$Component);
 
-    function Todo() {
+    function Todo(nextState) {
         _classCallCheck(this, Todo);
 
         var _this2 = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this));
@@ -19129,35 +19129,52 @@ var Todo = exports.Todo = function (_React$Component) {
             };
             getLists();
         }
+        /* shouldComponentUpdate (nextState) {
+                 for(let i = 0; i < this.state.lists.length; i++ ) {
+                     return (
+        		nextState.lists[i].status !== this.state.lists[i].status
+                     )
+                 };
+         }*/
+
     }, {
         key: 'registerList',
         value: function registerList(e) {
             if (e) {
                 e.preventDefault();
             }
-            if (this.filterType !== 'done') {
-                this.lists.push(this.state.text);
+            var array = this.state.lists;
+            var obj = {
+                text: this.state.text,
+                status: 0,
+                editValue: false
+            };
+            this.lists.push(obj);
+            if (this.state.filterType !== 'done') {
                 this.setState({
                     lists: this.lists,
                     text: ''
                 });
             }
-
-            $http.post('http://localhost:8000/todo', this.state.text).then(function (res) {
+            $http.post('http://localhost:8000/todo', obj).then(function (res) {
                 console.log(res);
             });
         }
     }, {
         key: 'filterLists',
         value: function filterLists(e) {
-            var filterType = e.target.value;
+            var filterType = '';
+            if (e) {
+                filterType = e.target.value;
+            } else {
+                filterType = this.state.filterType;
+            }
             var arr = [];
             this.setState({
                 lists: this.lists,
                 filterType: filterType
             });
             if (filterType === 'todo') {
-                console.log('todo');
                 this.lists.forEach(function (value, index) {
                     if (value.status === 0) {
                         arr.push(value);
@@ -19167,7 +19184,6 @@ var Todo = exports.Todo = function (_React$Component) {
                     lists: arr
                 });
             } else if (filterType === 'done') {
-                console.log('done');
                 this.lists.forEach(function (value, index) {
                     if (value.status === 1) {
                         arr.push(value);
@@ -19198,30 +19214,31 @@ var Todo = exports.Todo = function (_React$Component) {
             $http.put('http://localhost:8000/todo', { status: list.status, index: list.index }).then(function (res) {
                 console.log(res);
             });
+            this.filterLists();
         }
     }, {
         key: 'delete',
-        value: function _delete(list) {
-            delete this.lists[list.index - 1];
-            this.setState({
-                lists: this.lists
-            });
+        value: function _delete(list, index) {
+            var _this = this;
+            delete this.lists[index];
             $http.delete('http://localhost:8000/todo', { params: { index: list.index } }).then(function (res) {
                 console.log(res);
+                _this.setState({
+                    lists: _this.lists
+                });
             });
         }
     }, {
         key: 'edit',
         value: function edit(index) {
             this.lists[index].editValue = true;
-            console.log(this.lists[index]);
             this.setState({
                 lists: this.lists
             });
         }
     }, {
         key: 'editText',
-        value: function editText(event, index, list) {
+        value: function editText(event, index) {
             this.lists[index].text = event.target.value;
             this.setState({
                 lists: this.lists
@@ -19230,9 +19247,16 @@ var Todo = exports.Todo = function (_React$Component) {
     }, {
         key: 'registerEdited',
         value: function registerEdited(event, list) {
+            var _this = this;
             event.preventDefault();
             $http.put('http://localhost:8000/todo', { index: list.index, text: list.text }).then(function (res) {
                 console.log(res);
+                list.editValue = false;
+                if (this.filterType !== 'done') {
+                    _this.setState({
+                        lists: _this.lists
+                    });
+                }
             });
         }
     }, {
@@ -19318,7 +19342,7 @@ var Todo = exports.Todo = function (_React$Component) {
                                             return _this4.registerEdited(e, v);
                                         } },
                                     _react2.default.createElement(_index.EditInput, { value: v.text, onChange: function onChange(e) {
-                                            return _this4.editText(e, i, v);
+                                            return _this4.editText(e, i);
                                         } })
                                 ) : _react2.default.createElement(
                                     'span',
@@ -19327,7 +19351,7 @@ var Todo = exports.Todo = function (_React$Component) {
                                     v.text
                                 ),
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC0AD\uC81C', onClick: function onClick() {
-                                        return _this4.delete(v);
+                                        return _this4.delete(v, i);
                                     } }),
                                 _react2.default.createElement(_index.Button, { buttonText: '\uC218\uC815', onClick: function onClick() {
                                         return _this4.edit(i);
