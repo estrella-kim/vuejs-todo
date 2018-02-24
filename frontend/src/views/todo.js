@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './todo.css';
-import { Checkbox, Icon } from 'antd';
+import { Checkbox, Icon, Input } from 'antd';
 import 'antd/dist/antd.css';
-import { Button, EditInput } from '../components/index';
+import {Button} from '../components/index';
 import axios from 'axios';
 const $http = axios;
 
@@ -175,10 +175,9 @@ export class Todo extends React.Component{
                     <ul>
                         { this.state.lists.map((v, i) => (
                             <li key={i}>
-                                <Checkbox checked={v.status} onChange={ () => this.changeStatus(v, i) }>
-                                { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><EditInput value={v.text} onBlur={ () => this.edit(i) } onChange={(e) => this.editText(e, i)} /></form>)
+                                <Checkbox checked={v.status} onChange={ () => this.changeStatus(v, i) }></Checkbox>
+                                { v.editValue ? (<form onSubmit={(e) => this.registerEdited(e, v)}><Input value={v.text} onBlur={ () => this.edit(i) }  onChange={(e) => this.editText(e, i)} /></form>)
                                     : (<span onDoubleClick={ () => this.edit(i)}>{v.index}{v.text}</span>) }
-                                </Checkbox>
                                 <Icon type="close" onClick={ () => this.delete(v, i)}/>
                             </li>)
                         )}
