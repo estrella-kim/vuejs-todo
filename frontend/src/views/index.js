@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './style.css';
 import { Button } from '../components';
 
 export class Test extends React.Component{

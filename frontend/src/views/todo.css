@@ -1,6 +1,23 @@
 /* defatul */
-ul, li{
-    list-style :none;
+.wrap .wrap__todo-wrap{
+    width: 50%;
+    margin: 0 auto;
+    padding : 20px 30px;
+    background-color:#fff;
+    border: solid 3px #a56563;
+}
+.write-list form {
+    overflow: hidden;
+}
+.write-list form input{
+    float: left;
+    width: 85%;
+    margin-right: 5px;
+}
+.write-list form .anticon-edit{
+    font-size: 20px;
+    line-height: 25px;
+    cursor: pointer;
 }
 .filter-wrap{
     overflow: hidden;
@@ -16,7 +33,18 @@ ul, li{
 .write-list{
     margin-bottom : 30px;
 }
+.lists-wrap li{
+    overflow: hidden;
+}
+.lists-wrap li .ant-checkbox-wrapper{
+    float:left;
+    margin-right: 3px;
+}
 .anticon-close{
     float:right;
     color: #ff5346;
+    font-size: 20px;
+}
+.lists-wrap .edit-wrap{
+    float:left;
 }
