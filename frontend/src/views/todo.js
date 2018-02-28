@@ -58,10 +58,12 @@ export class Todo extends React.Component{
         $http.post('http://localhost:8000/todo', obj)
             .then(function(res){
                 console.log(res);
+                _this.setState({
+                    text : ''
+                })
                 if(_this.state.filterType !== 'done') {
                     _this.setState({
-                        lists : _this.lists,
-                        text : ''
+                        lists : _this.lists
                     })
                 }
             })
@@ -163,7 +165,7 @@ export class Todo extends React.Component{
                     <div className="write-list">
                         <form onSubmit={ (e) => this.registerList(e)}>
                             <Input type="text" onChange={(e) => this.getText(e) } value={this.state.text}/>
-                            <Icon type="edit"  onClick={ (e) => this.registerList(e) }/>
+                            <Icon type="edit" onClick={ (e) => this.registerList(e) }/>
                         </form>
                     </div>
                     <ul className="filter-wrap">
@@ -176,7 +178,7 @@ export class Todo extends React.Component{
                             { this.state.lists.map((v, i) => (
                                 <li key={i}>
                                     <Checkbox checked={v.status} onChange={ () => this.changeStatus(v, i) }></Checkbox>
-                                    { v.editValue ? (<form className="edit-wrap" onSubmit={(e) => this.registerEdited(e, v)}><Input value={v.text} size="small" onBlur={ () => this.edit(i) }  onChange={(e) => this.editText(e, i)} /></form>)
+                                    { v.editValue ? (<form className="edit-wrap" onSubmit={(e) => this.registerEdited(e, v)}><Input value={v.text} size="small" onBlur={ () => this.edit(i) } onChange={(e) => this.editText(e, i)} /></form>)
                                         : (<span onDoubleClick={ () => this.edit(i)}>{v.index}{v.text}</span>) }
                                     <Icon type="close" onClick={ () => this.delete(v, i)}/>
                                 </li>)
