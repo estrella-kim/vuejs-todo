@@ -33,6 +33,9 @@ export class Todo extends React.Component{
                         lists : _this.lists
                     })
                 })
+                .catch(function(error) {
+                    console.log(error);
+                })
         }
         getLists();
     }
@@ -130,6 +133,9 @@ export class Todo extends React.Component{
                     lists : _this.lists
                 })
             })
+            .catch(function(error){
+                console.log(error);
+            })
 
     }
     edit(index) {
@@ -156,6 +162,9 @@ export class Todo extends React.Component{
                         lists: _this.lists
                     })
                 }
+            })
+            .catch(function(error) {
+                console.log(error);
             })
     }
     render () {
