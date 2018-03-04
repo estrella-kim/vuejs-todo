@@ -3,7 +3,7 @@
 ## Features
 
 * Node.js
-* React
+* Vuejs
 
 ### Node.js Stack
 
@@ -11,7 +11,7 @@
 - Forever
 - Nodemon
 
-### React Stack
+### Vuejs Stack
 
 
 ## Getting started
