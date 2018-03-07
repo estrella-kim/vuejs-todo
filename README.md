@@ -8,11 +8,10 @@
 ### Node.js Stack
 
 - Express server
-- Forever
-- Nodemon
+- webpack-dev-server
 
 ### Vuejs Stack
-
+* Vue-cli
 
 ## Getting started
 
@@ -31,4 +30,10 @@ $ mkdir logs && cd logs && touch err.log & touch forever.log & touch out.log
 3. Serve the app
 ```bash
 $ node ./bin/www
+```
+
+### Frontend set up
+1. Install all frontend dependencies
+```bash
+$ cd frontend && npm install
 ```
