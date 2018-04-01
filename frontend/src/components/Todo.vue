@@ -2,7 +2,14 @@
   <div class="todo">
     <h1>{{intro}}</h1>
     <ul>
-        <li v-for="(number, index) in numbers" v-bind:number="number" v-bind:index="index" v-bind:key="number">{{ number }} is on list {{ index +1 }}.</li>
+        <li v-for="(person, index) of persons" v-bind:key="person.name">
+          <strong>{{index}}</strong>
+          <dl>
+            <dt>{{person.name}}</dt>
+            <dd>{{person.age}}</dd>
+            <dd>{{person.career}}</dd>
+          </dl>
+        </li>
       </ul>
   </div>
 </template>
@@ -13,7 +20,11 @@ export default {
   data () {
     return {
       intro: 'this is todo page with vuejs',
-      numbers: ['jiyoung', 'hong', 'lea', 'estrella']
+      persons: [
+        {name: 'jiyoung', age: 25, career: 'newbee'},
+        {name: 'hong', age: 29, career: 'jinior'},
+        {name: 'martin', age: 27, career: 'jununior'}
+      ]
     }
   }
 }
