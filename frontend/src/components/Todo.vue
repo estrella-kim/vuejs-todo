@@ -11,6 +11,7 @@
           </dl>
         </li>
       </ul>
+    <div>{{ check() }}</div>
   </div>
 </template>
 
@@ -25,6 +26,14 @@ export default {
         {name: 'hong', age: 29, career: 'jinior'},
         {name: 'martin', age: 27, career: 'jununior'}
       ]
+    }
+  },
+  computed: {
+    count: function () {
+      return this.$store.state.count
+    },
+    check: function () {
+      return this.$store
     }
   }
 }
