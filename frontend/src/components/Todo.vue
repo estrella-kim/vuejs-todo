@@ -11,7 +11,8 @@
           </dl>
         </li>
       </ul>
-    <div>{{ check() }}</div>
+    <button v-on:click="increment(count)">증가버튼</button>
+    <div>{{ count }}</div>
   </div>
 </template>
 
@@ -29,11 +30,13 @@ export default {
     }
   },
   computed: {
-    count: function () {
+    count () {
       return this.$store.state.count
-    },
-    check: function () {
-      return this.$store
+    }
+  },
+  methods: {
+    increment () {
+      this.$store.commit('increment')
     }
   }
 }
