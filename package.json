@@ -1,13 +1,12 @@
 {
-  "name": "File",
+  "name": "vuejs-study-sample",
   "version": "1.0.0",
-  "description": "",
+  "description": "todo-study",
   "main": "index.js",
   "scripts": {
     "start": "cd frontend && npm start & cd backend && npm start",
     "test": "cd frontend && npm i && npm test & cd backend && npm i"
   },
-  "keywords": [],
-  "author": "",
+  "author": "estrella-kim",
   "license": "ISC"
 }

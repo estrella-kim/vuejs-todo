@@ -13,5 +13,17 @@ new Vue({
   router,
   store: store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  beforeCreate () {
+    console.log('beforeCrate', this.$el)
+  },
+  created() {
+    console.log('created', this.$el)
+  },
+  beforeMount() {
+    console.log('beforeMount', this.$el)
+  },
+  mounted () {
+    console.log('mounted', this.$el)
+  }
 })

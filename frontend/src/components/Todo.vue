@@ -1,19 +1,21 @@
 <template>
-  <div class="todo">
-    <h1>{{intro}}</h1>
-    <ul>
-        <li v-for="(person, index) of persons" v-bind:key="person.name">
-          <strong>{{index}}</strong>
-          <dl>
-            <dt>{{person.name}}</dt>
-            <dd>{{person.age}}</dd>
-            <dd>{{person.career}}</dd>
-          </dl>
-        </li>
-      </ul>
-    <button v-on:click="increment(count)">증가버튼</button>
-    <div>{{ count }}</div>
-  </div>
+  <span class="todo">
+    <div>
+      <h1>{{intro}}</h1>
+      <ul>
+          <li v-for="(person, index) of persons" v-bind:key="person.name">
+            <strong>{{index}}</strong>
+            <dl>
+              <dt>{{person.name}}</dt>
+              <dd>{{person.age}}</dd>
+              <dd>{{person.career}}</dd>
+            </dl>
+          </li>
+        </ul>
+      <button v-on:click="increment(count)">증가버튼</button>
+      <div>{{ count }}</div>
+    </div>
+  </span>
 </template>
 
 <script>

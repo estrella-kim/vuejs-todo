@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
+  "name": "vuejs-study",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Vue.js study example",
   "author": "estrella-kim <puris38@naver.com>",
   "private": true,
   "scripts": {
