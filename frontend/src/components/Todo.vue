@@ -40,6 +40,14 @@ export default {
     increment () {
       this.$store.commit('increment')
     }
+  },
+  beforeCreate () {
+    console.log('beforeCreate', this.$el)
+  },
+  created () {
+    console.log('create', this.$el)
+  },
+  beforeMont () {
   }
 }
 </script>
